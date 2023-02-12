@@ -1,10 +1,10 @@
 import React from "react";
-import {useCharacters} from "../hooks/useCharacters";
+import { useCharacters } from "../hooks/useCharacters";
+import { Link } from "react-router-dom";
+import "./CharactersList.css";
 
 function CharactersList() {
-
-	const {error, loading, data} = useCharacters()
-
+  const { error, loading, data } = useCharacters();
 
   if (loading) return "Loading...";
 
@@ -12,13 +12,13 @@ function CharactersList() {
 
   return (
     <div className="CharactersList">
-      {data.characters.results.map((character) => {
+      {data.characters.results.map((character, index) => {
         console.log(character);
         return (
-          <div>
+          <Link to={`/${character.id}`} key={index}>
             <img src={character.image} alt={character.name} />
             <h2>{character.name}</h2>
-          </div>
+          </Link>
         );
       })}
     </div>
